@@ -83,8 +83,8 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    public function likes(): HasMany {
-        return $this->hasMany(Like::class);
+    public function likedPosts() {
+        return $this->belongsToMany(Post::class, 'likes')->withTimestamps();
     }
 
     public function scopeFilter(Builder $builder, QueryFilter $filters)
