@@ -1,0 +1,1925 @@
+openapi: 3.0.3
+info:
+  title: 'Chat-Api API Documentation'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+tags:
+  -
+    name: Authentication
+    description: ''
+  -
+    name: Endpoints
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.'
+security:
+  -
+    default: []
+paths:
+  /api/register:
+    post:
+      summary: Login
+      operationId: login
+      description: 'Signs In the user Create and Return the api token'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n \"data\" : {\n \"token\" : \"{YOUR_AUTH_KEY}\"\n}\n\"message\": \"Authenticated\",\n\"status\" : 200\n}"
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: vmqeopfuudtdsufvyvddq
+                  nullable: false
+                email:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: kunde.eloisa@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: ''
+                  example: consequatur
+                  nullable: false
+              required:
+                - name
+                - email
+                - password
+      security: []
+  /api/logout:
+    post:
+      summary: Logout
+      operationId: logout
+      description: "Signs Out the user and destroy's the api token"
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+      tags:
+        - Authentication
+  /api/login:
+    post:
+      summary: ''
+      operationId: postApiLogin
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: qkunze@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: 'Z5ij-e/dl4m{o,'
+                  nullable: false
+              required:
+                - email
+                - password
+  /api/v1/users:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      type: user
+                      id: 1
+                      attributes:
+                        name: bob
+                        email: bob@gmail.com
+                        emailVerifiedAt: null
+                        createdAt: '2025-07-24T07:12:17.000000Z'
+                        updatedAt: '2025-07-24T07:12:17.000000Z'
+                      links:
+                        self: 'http://localhost:8000/api/v1/users/1'
+                    -
+                      type: user
+                      id: 2
+                      attributes:
+                        name: Mustafa
+                        email: mus@gmail.com
+                        emailVerifiedAt: null
+                        createdAt: '2025-07-24T07:19:19.000000Z'
+                        updatedAt: '2025-07-24T07:19:19.000000Z'
+                      links:
+                        self: 'http://localhost:8000/api/v1/users/2'
+                  links:
+                    first: 'http://localhost:8000/api/v1/users?page=1'
+                    last: 'http://localhost:8000/api/v1/users?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://localhost:8000/api/v1/users?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://localhost:8000/api/v1/users'
+                    per_page: 15
+                    to: 2
+                    total: 2
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        type: user
+                        id: 1
+                        attributes:
+                          name: bob
+                          email: bob@gmail.com
+                          emailVerifiedAt: null
+                          createdAt: '2025-07-24T07:12:17.000000Z'
+                          updatedAt: '2025-07-24T07:12:17.000000Z'
+                        links:
+                          self: 'http://localhost:8000/api/v1/users/1'
+                      -
+                        type: user
+                        id: 2
+                        attributes:
+                          name: Mustafa
+                          email: mus@gmail.com
+                          emailVerifiedAt: null
+                          createdAt: '2025-07-24T07:19:19.000000Z'
+                          updatedAt: '2025-07-24T07:19:19.000000Z'
+                        links:
+                          self: 'http://localhost:8000/api/v1/users/2'
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: user
+                        id:
+                          type: integer
+                          example: 1
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: bob
+                            email:
+                              type: string
+                              example: bob@gmail.com
+                            emailVerifiedAt:
+                              type: string
+                              example: null
+                            createdAt:
+                              type: string
+                              example: '2025-07-24T07:12:17.000000Z'
+                            updatedAt:
+                              type: string
+                              example: '2025-07-24T07:12:17.000000Z'
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                              example: 'http://localhost:8000/api/v1/users/1'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/users?page=1'
+                      last:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/users?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://localhost:8000/api/v1/users?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/users'
+                      per_page:
+                        type: integer
+                        example: 15
+                      to:
+                        type: integer
+                        example: 2
+                      total:
+                        type: integer
+                        example: 2
+      tags:
+        - Endpoints
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 20 characters.'
+                  example: vmqeopfuudtdsufvy
+                  nullable: false
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: dcarter@example.org
+                  nullable: false
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: OP>@;4
+                  nullable: false
+              required:
+                - name
+                - email
+                - password
+  '/api/v1/users/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    type: user
+                    id: 1
+                    attributes:
+                      name: bob
+                      email: bob@gmail.com
+                      emailVerifiedAt: null
+                      createdAt: '2025-07-24T07:12:17.000000Z'
+                      updatedAt: '2025-07-24T07:12:17.000000Z'
+                    links:
+                      self: 'http://localhost:8000/api/v1/users/1'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        example: user
+                      id:
+                        type: integer
+                        example: 1
+                      attributes:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: bob
+                          email:
+                            type: string
+                            example: bob@gmail.com
+                          emailVerifiedAt:
+                            type: string
+                            example: null
+                          createdAt:
+                            type: string
+                            example: '2025-07-24T07:12:17.000000Z'
+                          updatedAt:
+                            type: string
+                            example: '2025-07-24T07:12:17.000000Z'
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                            example: 'http://localhost:8000/api/v1/users/1'
+      tags:
+        - Endpoints
+    put:
+      summary: ''
+      operationId: putApiV1UsersId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 20 characters.'
+                  example: vmqeopfuudtdsufvy
+                  nullable: false
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: dcarter@example.org
+                  nullable: false
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: OP>@;4
+                  nullable: false
+              required:
+                - name
+                - email
+                - password
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/api/v1/authors/{author_id}/posts':
+    get:
+      summary: ''
+      operationId: getApiV1AuthorsAuthor_idPosts
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: []
+                  links:
+                    first: 'http://localhost:8000/api/v1/authors/consequatur/posts?page=1'
+                    last: 'http://localhost:8000/api/v1/authors/consequatur/posts?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: null
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://localhost:8000/api/v1/authors/consequatur/posts?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://localhost:8000/api/v1/authors/consequatur/posts'
+                    per_page: 15
+                    to: null
+                    total: 0
+                properties:
+                  data:
+                    type: array
+                    example: []
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/authors/consequatur/posts?page=1'
+                      last:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/authors/consequatur/posts?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: string
+                        example: null
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://localhost:8000/api/v1/authors/consequatur/posts?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/authors/consequatur/posts'
+                      per_page:
+                        type: integer
+                        example: 15
+                      to:
+                        type: string
+                        example: null
+                      total:
+                        type: integer
+                        example: 0
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: author_id
+        description: 'The ID of the author.'
+        example: consequatur
+        required: true
+        schema:
+          type: string
+  /api/v1/posts:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      type: post
+                      id: 1
+                      attributes:
+                        title: 'A Good Post For Every One'
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                        user_id: 1
+                        media: '/home/mustafa/Desktop/chat-api/public/images/https://www.shutterstock.com/shutterstock/photos/2336453553/display_1500/stock-photo-x-twitter-new-logo-x-twitter-twitter-logo-elon-musk-toba-tek-singh-punjab-pakistan-jul-mon-2336453553.jpg'
+                        createAt: '2025-07-24T07:12:42+00:00'
+                        updateAt: '3 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 1
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/1'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/1'
+                    -
+                      type: post
+                      id: 2
+                      attributes:
+                        title: 'Fist Post For Every One'
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                        user_id: 2
+                        media: '/home/mustafa/Desktop/chat-api/public/images/https://www.shutterstock.com/shutterstock/photos/2336453553/display_1500/stock-photo-x-twitter-new-logo-x-twitter-twitter-logo-elon-musk-toba-tek-singh-punjab-pakistan-jul-mon-2336453553.jpg'
+                        createAt: '2025-07-25T13:06:02+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 2
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/2'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/2'
+                    -
+                      type: post
+                      id: 3
+                      attributes:
+                        title: 'Fist Post For Every One'
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                        user_id: 1
+                        media: '/home/mustafa/Desktop/chat-api/public/images/https://thumbs.dreamstime.com/b/x-twitter-new-twitter-twitter-logo-mystery-app-twitter-may-be-renamed-x-twitter-new-twitter-twitter-logo-285374871.jpg'
+                        createAt: '2025-07-25T13:06:29+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 1
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/1'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/3'
+                    -
+                      type: post
+                      id: 4
+                      attributes:
+                        title: 'Fist Post For Every One'
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                        user_id: 2
+                        media: '/home/mustafa/Desktop/chat-api/public/images/https://media.istockphoto.com/id/1829241109/photo/enjoying-a-brunch-together.jpg?s=612x612&w=0&k=20&c=9awLLRMBLeiYsrXrkgzkoscVU_3RoVwl_HA-OT-srjQ='
+                        createAt: '2025-07-25T14:21:56+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 2
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/2'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/4'
+                    -
+                      type: post
+                      id: 5
+                      attributes:
+                        title: 'Fist Post For Every One'
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                        user_id: 1
+                        media: '/home/mustafa/Desktop/chat-api/public/images/https://media.istockphoto.com/id/1457433817/photo/group-of-healthy-food-for-flexitarian-diet.jpg?s=612x612&w=0&k=20&c=v48RE0ZNWpMZOlSp13KdF1yFDmidorO2pZTu2Idmd3M='
+                        createAt: '2025-07-25T14:22:27+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 1
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/1'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/5'
+                    -
+                      type: post
+                      id: 6
+                      attributes:
+                        title: 'Fist Post For Every One'
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                        user_id: 2
+                        media: '/home/mustafa/Desktop/chat-api/public/images/https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                        createAt: '2025-07-25T14:22:48+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 2
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/2'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/6'
+                    -
+                      type: post
+                      id: 7
+                      attributes:
+                        title: 'Fist Post For Every One'
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                        user_id: 1
+                        media: '/home/mustafa/Desktop/chat-api/public/images/https://thumbs.dreamstime.com/b/x-twitter-new-twitter-twitter-logo-mystery-app-twitter-may-be-renamed-x-twitter-new-twitter-twitter-logo-285374871.jpg'
+                        createAt: '2025-07-25T14:22:56+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 1
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/1'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/7'
+                    -
+                      type: post
+                      id: 8
+                      attributes:
+                        title: 'X Social App For Developers'
+                        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos."
+                        user_id: 2
+                        media: '/home/mustafa/Desktop/chat-api/public/images/https://media.istockphoto.com/id/1457979959/photo/snack-junk-fast-food-on-table-in-restaurant-soup-sauce-ornament-grill-hamburger-french-fries.jpg?s=612x612&w=0&k=20&c=QbFk2SfDb-7oK5Wo9dKmzFGNoi-h8HVEdOYWZbIjffo='
+                        createAt: '2025-07-25T14:30:03+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 2
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/2'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/8'
+                    -
+                      type: post
+                      id: 9
+                      attributes:
+                        title: 'X Social App For Developers'
+                        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos."
+                        user_id: 1
+                        media: '/home/mustafa/Desktop/chat-api/public/images/https://cdn.britannica.com/85/13085-050-C2E88389/Corpus-Christi-College-University-of-Cambridge-England.jpg'
+                        createAt: '2025-07-25T14:30:56+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 1
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/1'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/9'
+                    -
+                      type: post
+                      id: 10
+                      attributes:
+                        title: 'Fist Post For Every One'
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                        user_id: 2
+                        media: '/home/mustafa/Desktop/chat-api/public/images/https://media.istockphoto.com/id/471296532/photo/planet-earth-at-night.jpg?s=612x612&w=0&k=20&c=n-9GMF-nYTuZJ5z6oc7sCo8MagfPlx2JeK-4visym_E='
+                        createAt: '2025-07-25T14:54:33+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 2
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/2'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/10'
+                    -
+                      type: post
+                      id: 11
+                      attributes:
+                        title: 'Fist Post For Every One'
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                        user_id: 1
+                        media: '/home/mustafa/Desktop/chat-api/public/images/https://thumbs.dreamstime.com/b/fruits-black-3063613.jpg'
+                        createAt: '2025-07-25T14:55:25+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 1
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/1'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/11'
+                    -
+                      type: post
+                      id: 12
+                      attributes:
+                        title: 'Fist Post For Every One'
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                        user_id: 2
+                        media: '/home/mustafa/Desktop/chat-api/public/images/https://www.foodandwine.com/thmb/ZVHRZ0Kj3g14-zNjQ8tYI9W-yyQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/global-tastemakers-us-restaurants-tatiana-8c5c9ef8f16e4d199277e33cd6d1513c.jpg'
+                        createAt: '2025-07-25T14:56:00+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 2
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/2'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/12'
+                    -
+                      type: post
+                      id: 13
+                      attributes:
+                        title: 'Testing Postman for File'
+                        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos."
+                        user_id: 1
+                        media: '/home/mustafa/Desktop/chat-api/public/images/http://localhost'
+                        createAt: '2025-07-26T03:14:48+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 1
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/1'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/13'
+                    -
+                      type: post
+                      id: 14
+                      attributes:
+                        title: 'Testing Postman for File'
+                        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos."
+                        user_id: 2
+                        media: /home/mustafa/Desktop/chat-api/public/images/postsImages/4a128909-b3e7-49f6-8056-70e4ab4fd138.jpg
+                        createAt: '2025-07-26T03:20:32+00:00'
+                        updateAt: '2 days ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 2
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/2'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/14'
+                    -
+                      type: post
+                      id: 15
+                      attributes:
+                        title: 'Test Postman for File Uploads'
+                        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos."
+                        user_id: 1
+                        media: /home/mustafa/Desktop/chat-api/public/images/postImages/dd9eb070-6e2f-43d9-917f-e67ebad76b6e.jpg
+                        createAt: '2025-07-27T08:37:40+00:00'
+                        updateAt: '19 hours ago'
+                      relationships:
+                        author:
+                          data:
+                            type: user
+                            id: 1
+                          links:
+                            self: 'http://localhost:8000/api/v1/users/1'
+                      links:
+                        self: 'http://localhost:8000/api/v1/posts/15'
+                  links:
+                    first: 'http://localhost:8000/api/v1/posts?page=1'
+                    last: 'http://localhost:8000/api/v1/posts?page=2'
+                    prev: null
+                    next: 'http://localhost:8000/api/v1/posts?page=2'
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 2
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://localhost:8000/api/v1/posts?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: 'http://localhost:8000/api/v1/posts?page=2'
+                        label: '2'
+                        active: false
+                      -
+                        url: 'http://localhost:8000/api/v1/posts?page=2'
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://localhost:8000/api/v1/posts'
+                    per_page: 15
+                    to: 15
+                    total: 20
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        type: post
+                        id: 1
+                        attributes:
+                          title: 'A Good Post For Every One'
+                          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                          user_id: 1
+                          media: '/home/mustafa/Desktop/chat-api/public/images/https://www.shutterstock.com/shutterstock/photos/2336453553/display_1500/stock-photo-x-twitter-new-logo-x-twitter-twitter-logo-elon-musk-toba-tek-singh-punjab-pakistan-jul-mon-2336453553.jpg'
+                          createAt: '2025-07-24T07:12:42+00:00'
+                          updateAt: '3 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 1
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/1'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/1'
+                      -
+                        type: post
+                        id: 2
+                        attributes:
+                          title: 'Fist Post For Every One'
+                          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                          user_id: 2
+                          media: '/home/mustafa/Desktop/chat-api/public/images/https://www.shutterstock.com/shutterstock/photos/2336453553/display_1500/stock-photo-x-twitter-new-logo-x-twitter-twitter-logo-elon-musk-toba-tek-singh-punjab-pakistan-jul-mon-2336453553.jpg'
+                          createAt: '2025-07-25T13:06:02+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 2
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/2'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/2'
+                      -
+                        type: post
+                        id: 3
+                        attributes:
+                          title: 'Fist Post For Every One'
+                          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                          user_id: 1
+                          media: '/home/mustafa/Desktop/chat-api/public/images/https://thumbs.dreamstime.com/b/x-twitter-new-twitter-twitter-logo-mystery-app-twitter-may-be-renamed-x-twitter-new-twitter-twitter-logo-285374871.jpg'
+                          createAt: '2025-07-25T13:06:29+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 1
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/1'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/3'
+                      -
+                        type: post
+                        id: 4
+                        attributes:
+                          title: 'Fist Post For Every One'
+                          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                          user_id: 2
+                          media: '/home/mustafa/Desktop/chat-api/public/images/https://media.istockphoto.com/id/1829241109/photo/enjoying-a-brunch-together.jpg?s=612x612&w=0&k=20&c=9awLLRMBLeiYsrXrkgzkoscVU_3RoVwl_HA-OT-srjQ='
+                          createAt: '2025-07-25T14:21:56+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 2
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/2'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/4'
+                      -
+                        type: post
+                        id: 5
+                        attributes:
+                          title: 'Fist Post For Every One'
+                          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                          user_id: 1
+                          media: '/home/mustafa/Desktop/chat-api/public/images/https://media.istockphoto.com/id/1457433817/photo/group-of-healthy-food-for-flexitarian-diet.jpg?s=612x612&w=0&k=20&c=v48RE0ZNWpMZOlSp13KdF1yFDmidorO2pZTu2Idmd3M='
+                          createAt: '2025-07-25T14:22:27+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 1
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/1'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/5'
+                      -
+                        type: post
+                        id: 6
+                        attributes:
+                          title: 'Fist Post For Every One'
+                          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                          user_id: 2
+                          media: '/home/mustafa/Desktop/chat-api/public/images/https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                          createAt: '2025-07-25T14:22:48+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 2
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/2'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/6'
+                      -
+                        type: post
+                        id: 7
+                        attributes:
+                          title: 'Fist Post For Every One'
+                          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                          user_id: 1
+                          media: '/home/mustafa/Desktop/chat-api/public/images/https://thumbs.dreamstime.com/b/x-twitter-new-twitter-twitter-logo-mystery-app-twitter-may-be-renamed-x-twitter-new-twitter-twitter-logo-285374871.jpg'
+                          createAt: '2025-07-25T14:22:56+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 1
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/1'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/7'
+                      -
+                        type: post
+                        id: 8
+                        attributes:
+                          title: 'X Social App For Developers'
+                          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos."
+                          user_id: 2
+                          media: '/home/mustafa/Desktop/chat-api/public/images/https://media.istockphoto.com/id/1457979959/photo/snack-junk-fast-food-on-table-in-restaurant-soup-sauce-ornament-grill-hamburger-french-fries.jpg?s=612x612&w=0&k=20&c=QbFk2SfDb-7oK5Wo9dKmzFGNoi-h8HVEdOYWZbIjffo='
+                          createAt: '2025-07-25T14:30:03+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 2
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/2'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/8'
+                      -
+                        type: post
+                        id: 9
+                        attributes:
+                          title: 'X Social App For Developers'
+                          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos."
+                          user_id: 1
+                          media: '/home/mustafa/Desktop/chat-api/public/images/https://cdn.britannica.com/85/13085-050-C2E88389/Corpus-Christi-College-University-of-Cambridge-England.jpg'
+                          createAt: '2025-07-25T14:30:56+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 1
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/1'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/9'
+                      -
+                        type: post
+                        id: 10
+                        attributes:
+                          title: 'Fist Post For Every One'
+                          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                          user_id: 2
+                          media: '/home/mustafa/Desktop/chat-api/public/images/https://media.istockphoto.com/id/471296532/photo/planet-earth-at-night.jpg?s=612x612&w=0&k=20&c=n-9GMF-nYTuZJ5z6oc7sCo8MagfPlx2JeK-4visym_E='
+                          createAt: '2025-07-25T14:54:33+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 2
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/2'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/10'
+                      -
+                        type: post
+                        id: 11
+                        attributes:
+                          title: 'Fist Post For Every One'
+                          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                          user_id: 1
+                          media: '/home/mustafa/Desktop/chat-api/public/images/https://thumbs.dreamstime.com/b/fruits-black-3063613.jpg'
+                          createAt: '2025-07-25T14:55:25+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 1
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/1'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/11'
+                      -
+                        type: post
+                        id: 12
+                        attributes:
+                          title: 'Fist Post For Every One'
+                          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                          user_id: 2
+                          media: '/home/mustafa/Desktop/chat-api/public/images/https://www.foodandwine.com/thmb/ZVHRZ0Kj3g14-zNjQ8tYI9W-yyQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/global-tastemakers-us-restaurants-tatiana-8c5c9ef8f16e4d199277e33cd6d1513c.jpg'
+                          createAt: '2025-07-25T14:56:00+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 2
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/2'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/12'
+                      -
+                        type: post
+                        id: 13
+                        attributes:
+                          title: 'Testing Postman for File'
+                          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos."
+                          user_id: 1
+                          media: '/home/mustafa/Desktop/chat-api/public/images/http://localhost'
+                          createAt: '2025-07-26T03:14:48+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 1
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/1'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/13'
+                      -
+                        type: post
+                        id: 14
+                        attributes:
+                          title: 'Testing Postman for File'
+                          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos."
+                          user_id: 2
+                          media: /home/mustafa/Desktop/chat-api/public/images/postsImages/4a128909-b3e7-49f6-8056-70e4ab4fd138.jpg
+                          createAt: '2025-07-26T03:20:32+00:00'
+                          updateAt: '2 days ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 2
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/2'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/14'
+                      -
+                        type: post
+                        id: 15
+                        attributes:
+                          title: 'Test Postman for File Uploads'
+                          description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.\nLorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos."
+                          user_id: 1
+                          media: /home/mustafa/Desktop/chat-api/public/images/postImages/dd9eb070-6e2f-43d9-917f-e67ebad76b6e.jpg
+                          createAt: '2025-07-27T08:37:40+00:00'
+                          updateAt: '19 hours ago'
+                        relationships:
+                          author:
+                            data:
+                              type: user
+                              id: 1
+                            links:
+                              self: 'http://localhost:8000/api/v1/users/1'
+                        links:
+                          self: 'http://localhost:8000/api/v1/posts/15'
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: post
+                        id:
+                          type: integer
+                          example: 1
+                        attributes:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                              example: 'A Good Post For Every One'
+                            description:
+                              type: string
+                              example: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                            user_id:
+                              type: integer
+                              example: 1
+                            media:
+                              type: string
+                              example: '/home/mustafa/Desktop/chat-api/public/images/https://www.shutterstock.com/shutterstock/photos/2336453553/display_1500/stock-photo-x-twitter-new-logo-x-twitter-twitter-logo-elon-musk-toba-tek-singh-punjab-pakistan-jul-mon-2336453553.jpg'
+                            createAt:
+                              type: string
+                              example: '2025-07-24T07:12:42+00:00'
+                            updateAt:
+                              type: string
+                              example: '3 days ago'
+                        relationships:
+                          type: object
+                          properties:
+                            author:
+                              type: object
+                              properties:
+                                data:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                      example: user
+                                    id:
+                                      type: integer
+                                      example: 1
+                                links:
+                                  type: object
+                                  properties:
+                                    self:
+                                      type: string
+                                      example: 'http://localhost:8000/api/v1/users/1'
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                              example: 'http://localhost:8000/api/v1/posts/1'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/posts?page=1'
+                      last:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/posts?page=2'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/posts?page=2'
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 2
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://localhost:8000/api/v1/posts?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: 'http://localhost:8000/api/v1/posts?page=2'
+                            label: '2'
+                            active: false
+                          -
+                            url: 'http://localhost:8000/api/v1/posts?page=2'
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://localhost:8000/api/v1/posts'
+                      per_page:
+                        type: integer
+                        example: 15
+                      to:
+                        type: integer
+                        example: 15
+                      total:
+                        type: integer
+                        example: 20
+      tags:
+        - Endpoints
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'Must not be greater than 30 characters.'
+                  example: vmqeopfuudtdsufvyvddq
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Must be at least 50 characters.'
+                  example: 'Dolores molestias ipsam sit.'
+                  nullable: false
+                user_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the users table.'
+                  example: 17
+                  nullable: false
+                media_url:
+                  type: string
+                  description: ''
+                  example: consequatur
+                  nullable: false
+              required:
+                - title
+                - description
+                - user_id
+                - media_url
+  '/api/v1/posts/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    type: post
+                    id: 1
+                    attributes:
+                      title: 'A Good Post For Every One'
+                      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                      user_id: 1
+                      media: '/home/mustafa/Desktop/chat-api/public/images/https://www.shutterstock.com/shutterstock/photos/2336453553/display_1500/stock-photo-x-twitter-new-logo-x-twitter-twitter-logo-elon-musk-toba-tek-singh-punjab-pakistan-jul-mon-2336453553.jpg'
+                      createAt: '2025-07-24T07:12:42+00:00'
+                      updateAt: '3 days ago'
+                    relationships:
+                      author:
+                        data:
+                          type: user
+                          id: 1
+                        links:
+                          self: 'http://localhost:8000/api/v1/users/1'
+                    links:
+                      self: 'http://localhost:8000/api/v1/posts/1'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        example: post
+                      id:
+                        type: integer
+                        example: 1
+                      attributes:
+                        type: object
+                        properties:
+                          title:
+                            type: string
+                            example: 'A Good Post For Every One'
+                          description:
+                            type: string
+                            example: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellat optio, voluptatum nemo natus numquam vitae assumenda pariatur repudiandae eligendi cumque illum veniam. Error provident quidem accusamus. Dolorem, quaerat quos.'
+                          user_id:
+                            type: integer
+                            example: 1
+                          media:
+                            type: string
+                            example: '/home/mustafa/Desktop/chat-api/public/images/https://www.shutterstock.com/shutterstock/photos/2336453553/display_1500/stock-photo-x-twitter-new-logo-x-twitter-twitter-logo-elon-musk-toba-tek-singh-punjab-pakistan-jul-mon-2336453553.jpg'
+                          createAt:
+                            type: string
+                            example: '2025-07-24T07:12:42+00:00'
+                          updateAt:
+                            type: string
+                            example: '3 days ago'
+                      relationships:
+                        type: object
+                        properties:
+                          author:
+                            type: object
+                            properties:
+                              data:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                    example: user
+                                  id:
+                                    type: integer
+                                    example: 1
+                              links:
+                                type: object
+                                properties:
+                                  self:
+                                    type: string
+                                    example: 'http://localhost:8000/api/v1/users/1'
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+                            example: 'http://localhost:8000/api/v1/posts/1'
+      tags:
+        - Endpoints
+    put:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'Must not be greater than 30 characters.'
+                  example: vmqeopfuudtdsufvyvddq
+                  nullable: false
+                description:
+                  type: string
+                  description: 'Must be at least 50 characters.'
+                  example: 'Dolores molestias ipsam sit.'
+                  nullable: false
+                user_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the users table.'
+                  example: 17
+                  nullable: false
+                media_url:
+                  type: string
+                  description: ''
+                  example: 'http://kunze.biz/iste-laborum-eius-est-dolor.html'
+                  nullable: false
+              required:
+                - title
+                - description
+                - user_id
+                - media_url
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the post.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/likes:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      user_id: 1
+                      post_id: 1
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        user_id: 1
+                        post_id: 1
+                    items:
+                      type: object
+                      properties:
+                        user_id:
+                          type: integer
+                          example: 1
+                        post_id:
+                          type: integer
+                          example: 1
+      tags:
+        - Endpoints
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the users table.'
+                  example: 17
+                  nullable: false
+                post_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the posts table.'
+                  example: 17
+                  nullable: false
+              required:
+                - user_id
+                - post_id
+  '/api/v1/likes/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    user_id: 1
+                    post_id: 1
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      user_id:
+                        type: integer
+                        example: 1
+                      post_id:
+                        type: integer
+                        example: 1
+      tags:
+        - Endpoints
+    put:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the users table.'
+                  example: 17
+                  nullable: false
+                post_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the posts table.'
+                  example: 17
+                  nullable: false
+              required:
+                - user_id
+                - post_id
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the like.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/comment:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      comment: 'Nice Post I like that'
+                      user_id: 1
+                      post_id: 1
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        comment: 'Nice Post I like that'
+                        user_id: 1
+                        post_id: 1
+                    items:
+                      type: object
+                      properties:
+                        comment:
+                          type: string
+                          example: 'Nice Post I like that'
+                        user_id:
+                          type: integer
+                          example: 1
+                        post_id:
+                          type: integer
+                          example: 1
+      tags:
+        - Endpoints
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: vmqeopfuudtdsufvyvddq
+                  nullable: false
+                user_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the users table.'
+                  example: 17
+                  nullable: false
+                post_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the posts table.'
+                  example: 17
+                  nullable: false
+              required:
+                - comment
+                - user_id
+                - post_id
+  '/api/v1/comment/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    comment: 'Nice Post I like that'
+                    user_id: 1
+                    post_id: 1
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      comment:
+                        type: string
+                        example: 'Nice Post I like that'
+                      user_id:
+                        type: integer
+                        example: 1
+                      post_id:
+                        type: integer
+                        example: 1
+      tags:
+        - Endpoints
+    put:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: vmqeopfuudtdsufvyvddq
+                  nullable: false
+                user_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the users table.'
+                  example: 17
+                  nullable: false
+                post_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the posts table.'
+                  example: 17
+                  nullable: false
+              required:
+                - comment
+                - user_id
+                - post_id
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the comment.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/follow:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      follower_id: 1
+                      following_id: 2
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        follower_id: 1
+                        following_id: 2
+                    items:
+                      type: object
+                      properties:
+                        follower_id:
+                          type: integer
+                          example: 1
+                        following_id:
+                          type: integer
+                          example: 2
+      tags:
+        - Endpoints
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                follower_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the users table.'
+                  example: 17
+                  nullable: false
+                following_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the users table.'
+                  example: 17
+                  nullable: false
+              required:
+                - follower_id
+                - following_id
+  '/api/v1/follow/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    follower_id: 1
+                    following_id: 2
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      follower_id:
+                        type: integer
+                        example: 1
+                      following_id:
+                        type: integer
+                        example: 2
+      tags:
+        - Endpoints
+    put:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the follow.'
+        example: 1
+        required: true
+        schema:
+          type: integer
