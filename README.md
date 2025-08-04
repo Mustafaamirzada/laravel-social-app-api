@@ -22,6 +22,8 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
 
+# <p align="center">Laravel Social App API</p>
+
 ## This Laravel API Features
 
 This API Has Many of the Modern Laravel 12 Framework Features and packages for Example sanctum for Authentication Scribe for API Docmentaion and more.
