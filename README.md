@@ -21,40 +21,59 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## This Laravel API Features
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+This API Has Many of the Modern Laravel 12 Framework Features and packages for Example sanctum for Authentication Scribe for API Docmentaion and more.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### API Features
 
-## Laravel Sponsors
+- **Authentication**
+- **Authorization**
+- **Searching and Filtering**
+- **Control Policies**
+- **API Versioning**
+- **Resources & Requests**
+- **One To One, One To Many, Many To Many Relationships**
+- **For Mobile & Web Apps**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+## How to Run it Localy
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- clone the repository 
+```
+$ git clone https://github.com/Mustafaamirzada/Complete-API-App.git
+```
+- change to the cloned directory
+```
+$ cd Complete-API-App
+```
+- install the packages
+```
+$ composer install
+```
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- edit the .env file or create new one from .env.example configure the database connection
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=<Your-database-name-for-this-app>
+DB_USERNAME=<Your-username-of-database>
+DB_PASSWORD=<password-of-database-user-account>
+```
+- finally run the project
+```
+php artisan sereve
+```
+- if you want to run it for spacific IP address for example for IP 192.168.0.1
+```
+php artisan serve --host=192.168.0.1
+```
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within This API, please send an e-mail to Me via [MustafaAmirzada](mailto:mustafa.amirzada.afg@gmail.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
