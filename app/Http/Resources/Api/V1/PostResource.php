@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources\Api\V1;
 
+use App\Models\Like;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
@@ -15,12 +15,6 @@ class PostResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        /*
-        'description' => $this->when(
-            $request->routeIs('posts.show'),
-            $this->description,
-        )
-        */
         return [
             'type' => 'post',
             'id' => $this->id,
@@ -28,27 +22,41 @@ class PostResource extends JsonResource
                 'title' => $this->title,
                 'description' => $this->description,
                 'user_id' => $this->user_id,
-                // 'media_url' => asset(Storage::url($this->media_url)),
-                'media_url' => asset('storage/images/'. $this->media_url),
+                'media_url' => asset('storage/images/' . $this->media_url),
                 'createAt' => $this->created_at,
                 'updateAt' => $this->updated_at,
             ],
             'relationships' => [
-                'author'=> [
+                'author' => [
                     'data' => [
                         'type' => 'user',
                         'id' => $this->user_id,
                     ],
+                    // this is link for user details
                     'links' => [
-                        'self' => route('users.show', ['user'=> $this->user_id])
+                        'self' => route('users.show', ['user' => $this->user_id])
                     ]
                 ],
             ],
+            // this load users relationships with posts   one user several post
             'includes' => new UserResource($this->whenLoaded('author')),
-            'links' => [
-                'self' => route('posts.show', ['post'=> $this->id])
-            ],
+            /*
+            this is for showing the likes in all routes
+            'likes' => LikeResource::collection(
+                Like::where('post_id', $this->id)->latest()->paginate()
+            ),*/
             
+            // and this is for showing the likes only for index route
+            'likes' => $this->when(
+            $request->routeIs('posts.index'),
+            LikeResource::collection(
+            Like::where('post_id', $this->id)->latest()->paginate()),
+            ),
+
+            'links' => [
+                'self' => route('posts.show', ['post' => $this->id])
+            ],
+
         ];
     }
 }

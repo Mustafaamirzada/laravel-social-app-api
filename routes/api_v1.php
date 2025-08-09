@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\LikeController;
 use App\Http\Controllers\Api\V1\PostController;
 use App\Http\Controllers\Api\V1\UserController;
-use Pest\Plugins\Only;
+
 
 Route::middleware('auth:sanctum')->group(function () {
   
@@ -26,5 +26,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
   Route::apiResource('/follow', FollowController::class)
     ->only(['store', 'destroy']);
-});
 
+
+});

@@ -18,6 +18,8 @@ class LikeResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'post_id' => $this->post_id,
+            'createdAt' => $this->created_at,
+            'updatedAt' => $this->updated_at,
         ];
     }
 }

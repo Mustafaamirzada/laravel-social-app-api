@@ -13,7 +13,6 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -57,18 +56,6 @@ class User extends Authenticatable
     public function posts(): HasMany {
         return $this->hasMany(Post::class);
     }
-
-        // Users that this user follows
-    // public function followings(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(User::class, 'follows', 'follower_id', 'following_id');
-    // }
-
-    // // Users that follow this user
-    // public function followers(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(User::class, 'follows', 'following_id', 'follower_id');
-    // }
 
 
     public function follower(): HasMany {

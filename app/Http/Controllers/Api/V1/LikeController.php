@@ -24,14 +24,15 @@ class LikeController extends ApiController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreLikeRequest $request)    
+    public function store(StoreLikeRequest $request)
     {
-        try {
-            $like = Like::create($request->validated());
+        // try {
+            $data = $request->validated();
+            $like = Like::create($data);
             return new LikeResource($like);
-        } catch (Exception $e) {
-            return $this->error('Unable to Like Post', 404);
-        }
+        // } catch /(Exception $e) {
+            // return $this->error('Unable to Like Post', 404);
+        // }
     }
 
     /**
@@ -40,7 +41,8 @@ class LikeController extends ApiController
     public function update(UpdateLikeRequest $request, Like $like)
     {
         try{
-            $like->update($request->validated());
+            $data = $request->validated();
+            $like->update($data);
             return new LikeResource($like);
         } catch (Exception $e) {
             return $this->error('Unable to Update the Liked Post',404);

@@ -24,7 +24,6 @@ class PostController extends ApiController
         return PostResource::collection(Post::filter($filters)->latest()->paginate(30));
     }
 
-    // $file = Storage::disk('public')->put('images/', $name);
     /**
      * Store a newly created resource in storage.
      */
@@ -66,7 +65,7 @@ class PostController extends ApiController
     public function update(UpdatePostRequest $request, Post $post)
     {
         try{
-            $this->isAble('update', $post);
+            // $this->isAble('update', $post);
             $data = $request->validated();
             
             if ($request->hasFile('media_url')) { 
