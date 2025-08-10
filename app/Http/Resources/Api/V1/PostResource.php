@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api\V1;
 
+use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -45,12 +46,26 @@ class PostResource extends JsonResource
             'likes' => LikeResource::collection(
                 Like::where('post_id', $this->id)->latest()->paginate()
             ),*/
+
+            // for all comments of single post count 
+            'comment_count' => Comment::where('post_id', $this->id)->get()->count(),
+
+            // for all likes of single post count
+            'like_count' => Like::where('post_id', $this->id)->get()->count(),
             
+            // comments
+            'comments' => $this->when(
+                $request->routeIs('posts.show'),
+                CommentResource::collection(
+                    Comment::where('post_id', $this->id)->get(),
+                )
+            ),
             // and this is for showing the likes only for index route
             'likes' => $this->when(
-            $request->routeIs('posts.index'),
-            LikeResource::collection(
-            Like::where('post_id', $this->id)->latest()->paginate()),
+                $request->routeIs('posts.index'),
+                LikeResource::collection(
+                    Like::where('post_id', $this->id)->latest()->paginate()
+                ),
             ),
 
             'links' => [
