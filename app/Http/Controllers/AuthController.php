@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Str;
 
 
 class AuthController extends Controller
@@ -39,13 +40,20 @@ class AuthController extends Controller
             'password' => 'required', 'confirmed', 'min:6',
         ]);
 
+        if ($request->hasFile('media_url')) { 
+                $file = $request->file('media_url');
+                $name = Str::uuid() . '.' . $file->extension();
+                $file->storeAs('images/', $name, 'public');
+                $request['media_url'] = $name;
+            }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'image_url' => $request->image_url,
         ]);
+           
 
-        // event(new Registered($user));
 
         Auth::login($user);
         return $this->ok(
@@ -54,6 +62,7 @@ class AuthController extends Controller
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
+                'image_url' => $user->image_url,
                 'token' => $user->createToken(
                     'API token for '. $user->email,
                     Abilities::getAbilities($user),
