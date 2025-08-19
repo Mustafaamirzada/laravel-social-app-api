@@ -18,8 +18,10 @@ class UserResource extends JsonResource
             'type' => 'user',
             'id' => $this->id,
             'attributes' => [
+                'id'=> $this->id,
                 'name'=> $this->name,
                 'email'=> $this->email,
+                "role"=>'isAuthenticated',
                 $this->mergeWhen($request->routeIs('users.*'),[
                     'emailVerifiedAt' => $this->email_verified_at,
                     'createdAt' => $this->created_at,
