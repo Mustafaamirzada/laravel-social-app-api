@@ -7,9 +7,8 @@ use Illuminate\Support\Str;
 use App\Traits\ApiResponses;
 use Illuminate\Http\Request;
 use App\Permissions\V1\Abilities;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\Api\LoginUserRequest;
 
 
@@ -38,7 +37,7 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
             'password' => 'required', 'confirmed', 'min:6',
-            'media_url' => 'required|','required','mimes:png,jpeg,jpg,svg|max:3072'
+            'media_url' => 'required|','mimes:png,jpeg,jpg,svg|max:3072'
         ]);
 
         if ($request->hasFile('media_url')) { 
@@ -47,12 +46,19 @@ class AuthController extends Controller
             $file->storeAs('images/profiles/', $name, 'public');
             $data['media_url'] = $name;
         }
-        
+
+        // $user = new User();
+        // $user->name = $request->name;
+        // $user->email = $request->email;
+        // $user->password= $request->password;
+        // $user->media_url = $request->media_url;
+        // $user->save();
+
         $user = User::create($data);
 
-        // event(new Registered($user));
 
         Auth::login($user);
+
         return $this->ok(
             'New Authenticated',
             [
@@ -74,6 +80,12 @@ class AuthController extends Controller
         // $request->validate($request->all());
 
         if (!Auth::attempt($request->only("email","password"))) {
+            Log::error('Login failed', [
+                'email' => $request->email,
+                'ip' => $request->ip(),
+            ]);
+
+
             return $this->error("Invalid Credential", 401);
         }
 
