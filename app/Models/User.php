@@ -51,8 +51,21 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            
         ];
     }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    // protected function casts(): array
+    // {
+    //     return [
+    //         'api_token' => 'encrypted',
+    //     ];
+    // }
 
     public function posts(): HasMany {
         return $this->hasMany(Post::class);

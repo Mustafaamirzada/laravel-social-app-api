@@ -12,16 +12,21 @@ use App\Http\Resources\Api\V1\PostResource;
 use App\Http\Requests\Api\V1\StorePostRequest;
 use App\Http\Requests\Api\V1\UpdatePostRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends ApiController
 {
     protected $policyClasss = PostPolicy::class;
+
+    
     /**
      * Display a listing of the resource.
      */
     public function index(PostFilter $filters)
     {
-        return PostResource::collection(Post::filter($filters)->latest()->paginate(30));
+        return PostResource::collection(
+            Post::filter($filters)->latest()->paginate(30)
+        );
     }
 
     /**
@@ -65,7 +70,9 @@ class PostController extends ApiController
     public function update(UpdatePostRequest $request, Post $post)
     {
         try{
-            // $this->isAble('update', $post);
+            
+            Gate::authorize('update', $post);
+
             $data = $request->validated();
             
             if ($request->hasFile('media_url')) { 
@@ -89,7 +96,8 @@ class PostController extends ApiController
     {
         try {
             $post = Post::findOrFail($post_id);
-            $this->isAble('delete', $post); 
+            // $this->isAble('delete', $post); 
+            Gate::authorize('delete', $post_id);
             $post->delete();
             return $this->ok('Post Deleted Successfully', []);
         } catch (ModelNotFoundException $exception) {
